@@ -16,9 +16,9 @@ import mqttPetrolog
 import apiClient
 import logging
 
-# logging.basicConfig(format='%(asctime)s - [%(levelname)s]: %(message)s',
-#                     filename='/home/pi/logs/mqtt.log',
-#                     level=logging.INFO)
+logging.basicConfig(format='%(asctime)s - [%(levelname)s]: %(message)s',
+                    filename='/home/ec2-user/logs/mqtt.log',
+                    level=logging.INFO)
 
 mqttPetrologDaemon = threading.Thread(target=mqttPetrolog.mqttPetrologDaemon)
 mqttPetrologDaemon.daemon = True

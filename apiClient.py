@@ -37,26 +37,30 @@ def httpPOST(msg):
 
 # Define event callbacks
 def on_connect(mosq, obj, rc):
-    print("rc: " + str(rc))
+    logging.info("Connected, rc: " + str(rc))
+    # Subscribe to Command
+    mqttc.subscribe('XML/#', 0)
+
+
 
 
 def on_message(mosq, obj, msg):
-    print(msg.topic + " " + str(msg.qos) + " " + str(msg.payload))
+    logging.debug(msg.topic + " " + str(msg.qos) + " " + str(msg.payload))
     t = threading.Thread(target=httpPOST, args=(msg,))
     t.daemon = True
     t.start()
 
 
 def on_publish(mosq, obj, mid):
-    print("mid: " + str(mid))
+    logging.debug("mid: " + str(mid))
 
 
 def on_subscribe(mosq, obj, mid, granted_qos):
-    print("Subscribed: " + str(mid) + " " + str(granted_qos))
+    logging.info("Subscribed: " + str(mid) + " " + str(granted_qos))
 
 
 def on_log(mosq, obj, level, string):
-    print(string)
+    logging.debug(string)
 
 
 # Create Mosquitto Client object
@@ -69,19 +73,8 @@ mqttc.on_publish = on_publish
 mqttc.on_subscribe = on_subscribe
 
 # Connect
-mqttc.connect('54.84.2.71', 1883)
-
-# Subscribe to Command
-mqttc.subscribe('XML/#', 0)
-
-
+mqttc.connect('localhost', 1883)
 
 
 def apiClientDaemon():
-
-    # Continue the network loop, exit when an error occurs TODO loop_forever
-    rc = 0
-    while rc == 0:
-        rc = mqttc.loop()
-    print("rc: " + str(rc))
-
+    mqttc.loop_forever()
