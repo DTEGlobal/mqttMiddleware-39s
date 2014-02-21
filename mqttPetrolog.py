@@ -25,7 +25,6 @@ def createStateDataXML(msg):
     UpdateStateData = myXML.parse('/home/ec2-user/mqttMiddleware/XMLs/UpdateStateData.xml')
     S = msg.payload.split(',')
     root = UpdateStateData.getroot()
-    del S[-1]
     try:
         i = 0
         for value in S:
