@@ -66,11 +66,6 @@ def createGraphDataXML(msg):
             mqttc.publish("XML/{0}/{1}".format(ID[1], ID[2]), myXML.tostring(GraphData.getroot()))
 
 
-#def createCommandXML(msg):
-
-
-
-
 # Define event callbacks
 def on_connect(mosq, obj, rc):
     logging.info("Connected, rc: " + str(rc))
@@ -89,9 +84,6 @@ def on_message(mosq, obj, msg):
         t = threading.Thread(target=createGraphDataXML, args=(msg,))
         t.daemon = True
         t.start()
-    # elif msgID[2] == 'PR':
-    #     t = threading.Thread(target=createCommandXML, args=(msg,))
-    #     t.start() TODO
     return
 
 

@@ -17,6 +17,7 @@ import logging
 import urllib2
 from urllib2 import URLError
 
+
 def httpPOST(msg):
     telemetryAddress = msg.topic.split('/')
     if telemetryAddress[2] == 'S':
@@ -26,13 +27,12 @@ def httpPOST(msg):
 
     req = urllib2.Request(url='http://petrolog.intelectix.com/api/{0}'.format(url),
                           data=msg.payload,
-                          headers={'Content-Type':'text/xml',
-                                   'Authorization':'DeviceNumber={0},ApiKey=UGV0cm9sb2dDbGllbnRl'.format(telemetryAddress[1])})
+                          headers={'Content-Type': 'text/xml',
+                                   'Authorization': 'DeviceNumber={0},ApiKey=UGV0cm9sb2dDbGllbnRl'.format(telemetryAddress[1])})
     try:
         urllib2.urlopen(req)
     except URLError as e:
         logging.warning('Failed to open connection to server! Error = %s', e.reason)
-
 
 
 # Define event callbacks
@@ -40,8 +40,6 @@ def on_connect(mosq, obj, rc):
     logging.info("Connected, rc: " + str(rc))
     # Subscribe to Command
     mqttc.subscribe('XML/#', 0)
-
-
 
 
 def on_message(mosq, obj, msg):
