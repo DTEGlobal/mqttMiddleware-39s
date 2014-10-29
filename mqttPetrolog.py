@@ -28,7 +28,16 @@ def createStateDataXML(msg):
     try:
         i = 0
         for value in S:
-            root[i].text = value
+            if i == 7:
+                # Patch for error in Time to Next Start in RPi G4_CPURPI01.
+                # The value for seconds to next start is in reality:
+                #   MSB = 0xFF - Min for Next Start
+                #   LSB = 0xFF - Sec for Next Start
+                # The current field version of G4_CPURPI01 is implemented:
+                #   0xFFFF - Sec for Next Start
+                # This code should be removed if the error is fixed in a future version of G4_CPURPI01
+                value = float(value) / 4.2
+            root[i].text = str(int(value))
             i += 1
     except IndexError:
         logging.error('Rx message error')

@@ -25,7 +25,7 @@ def httpPOST(msg):
     elif telemetryAddress[2] == 'D':
         url = 'graph'
 
-    req = urllib2.Request(url='http://petrolog.intelectix.com/api/{0}'.format(url),
+    req = urllib2.Request(url='http://petrologweb.com/api/{0}'.format(url),
                           data=msg.payload,
                           headers={'Content-Type': 'text/xml',
                                    'Authorization': 'DeviceNumber={0},ApiKey=UGV0cm9sb2dDbGllbnRl'.format(telemetryAddress[1])})
