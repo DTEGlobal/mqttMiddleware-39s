@@ -71,7 +71,7 @@ mqttc.on_publish = on_publish
 mqttc.on_subscribe = on_subscribe
 
 # Connect
-mqttc.connect('localhost', 1883)
+mqttc.connect('172.31.38.208', 1883)
 
 
 def apiClientDaemon():
