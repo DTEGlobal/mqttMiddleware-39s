@@ -21,6 +21,9 @@ import omnimeter_39s
 logging.basicConfig(format='%(asctime)s - [%(levelname)s]: %(message)s',
                     filename='/home/ec2-user/logs/mqtt.log',
                     level=logging.INFO)
+# logging.basicConfig(format='%(asctime)s - [%(levelname)s]: %(message)s',
+#                     filename='/home/logs/mqtt.log',
+#                     level=logging.DEBUG)
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)

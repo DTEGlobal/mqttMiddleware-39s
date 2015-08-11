@@ -18,9 +18,8 @@ def send_39(msg):
     :param msg: mqtt topic: OM/F/[id]/[data1, data2 ..]
     :return: N/A (thread)
     """
-    # telemetry_address_hex = hex(int(msg.topic.split('/')[2]))
-    # telemetry_address = telemetry_address_hex[2:].upper()
-    telemetry_address = '000105'  # TODO! Change to device ID
+    telemetry_address_hex = hex(int(msg.topic.split('/')[2]))
+    telemetry_address = telemetry_address_hex[2:].upper().zfill(6)
     logging.debug('omnimeter_39s: send_39 telemetry_address={0}'.format(telemetry_address))
     # Fill DI with 0s (not used in Omnimeter)
     data_packet = '00000000'
