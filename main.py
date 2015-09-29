@@ -16,12 +16,12 @@ import logging
 import logging.handlers
 import _39s
 
-# logging.basicConfig(format='%(asctime)s - [%(levelname)s]: %(message)s',
-#                     filename='/home/ec2-user/logs/mqtt.log',
-#                     level=logging.INFO)
 logging.basicConfig(format='%(asctime)s - [%(levelname)s]: %(message)s',
-                    filename='/Users/Cesar/logs/mqtt.log',
-                    level=logging.DEBUG)
+                    filename='/home/ec2-user/logs/_39s.log',
+                    level=logging.INFO)
+# logging.basicConfig(format='%(asctime)s - [%(levelname)s]: %(message)s',
+#                     filename='/Users/Cesar/logs/mqtt.log',
+#                     level=logging.DEBUG)
 
 _39sDaemon = threading.Thread(target=_39s.apiClientDaemon)
 _39sDaemon.daemon = True
