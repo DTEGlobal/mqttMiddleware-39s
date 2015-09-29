@@ -12,38 +12,20 @@ __author__ = 'Cesar'
 #-------------------------------------------------------------------------------
 
 import threading
-# import mqttPetrolog
-# import apiClient
 import logging
 import logging.handlers
-import omnimeter_39s
+import _39s
 
-logging.basicConfig(format='%(asctime)s - [%(levelname)s]: %(message)s',
-                    filename='/home/ec2-user/logs/mqtt.log',
-                    level=logging.INFO)
 # logging.basicConfig(format='%(asctime)s - [%(levelname)s]: %(message)s',
-#                     filename='/home/logs/mqtt.log',
-#                     level=logging.DEBUG)
+#                     filename='/home/ec2-user/logs/mqtt.log',
+#                     level=logging.INFO)
+logging.basicConfig(format='%(asctime)s - [%(levelname)s]: %(message)s',
+                    filename='/Users/Cesar/logs/mqtt.log',
+                    level=logging.DEBUG)
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
-# add handler to the logger
-handler = logging.handlers.SysLogHandler('/dev/log')
-
-# add syslog format to the handler
-formatter = logging.Formatter('%(name)s: %(message)s')
-handler.formatter = formatter
-
-logger.addHandler(handler)
-
-# mqttPetrologDaemon = threading.Thread(target=mqttPetrolog.mqttPetrologDaemon)
-# mqttPetrologDaemon.daemon = True
-# mqttPetrologDaemon.start()
-
-apiClientDaemon = threading.Thread(target=omnimeter_39s.apiClientDaemon)
-apiClientDaemon.daemon = True
-apiClientDaemon.start()
+_39sDaemon = threading.Thread(target=_39s.apiClientDaemon)
+_39sDaemon.daemon = True
+_39sDaemon.start()
 
 
 while True:
